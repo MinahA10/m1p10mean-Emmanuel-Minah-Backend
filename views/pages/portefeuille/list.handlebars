@@ -1,0 +1,54 @@
+<div class="modal fade" id="modalConfirmationPortefeuille" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmationPortefeuilleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/auth/confirm-wallet" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="confirmationPortefeuilleLabel">Confirmation de la validation du portefeuille</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <i class="mdi mdi-alert fs-1 text-danger"></i>
+                    </div>
+                    <p class="text-center">Vous voulez vraiment confirmer le montant <span class="fw-bold" id="label_confirmation_portefeuille_montant"></span> de la part de <span class="fw-bold" id="label_confirmation_portefeuille_nom"></span> ?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <input type="hidden" name="walletsId" id="walletsId">
+                    <button type="button" class="btn btn-secondary text-white w-45" data-bs-dismiss="modal">Non</button>
+                    <button type="submit" class="btn btn-danger text-white w-45">Oui</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="row m-4">
+                <div class="table-responsive mt-3">
+                    <table class="table text-nowrap table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Nom et Prénom</th>
+                                <th class="border-top-0">Montant</th>
+                                <th class="border-top-0">Date</th>
+                                <th class="border-top-0">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each walletList}}
+                                <tr>
+                                    <td>{{this.clients.name }}</td>
+                                    <td>{{formatMillier this.credit}} Ar</td>
+                                    <td>{{formatDate this.createdAt}}</td>
+                                    <td><a href="#" class="btn btn-outline-success" data-bs-toggle="modal" value="{{ this._id }}" id="confirmationPortefeuille" data-bs-target="#modalConfirmationPortefeuille"><i class="fas fa-check"></i> Valider</a></td>
+                                </tr>
+                            {{/each }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

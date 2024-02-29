@@ -119,3 +119,71 @@
     height: 100%;
     object-fit: cover;/* Pour que l'image remplisse entièrement le div tout en conservant son ratio d'aspect */
 }
+
+.bg-light-info{
+    background-color: #f8f9fa!important;
+}
+
+.text-gray{
+    color: #2f323e!important;
+}
+
+/* Chart css */
+.rounded-legend ul li {
+    list-style-type: none;
+    color: #9c9fa6;
+    font-size: .75rem;
+}
+
+.rounded-legend ul li .legend-dots {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-right: .5rem;
+}
+
+.rtl .rounded-legend ul li .legend-dots {
+    margin-left: .5rem;
+}
+
+.rounded-legend.legend-horizontal {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.rounded-legend.legend-horizontal ul li {
+    display: inline-block;
+    margin-right: 1.5rem;
+}
+
+.rtl .rounded-legend.legend-horizontal ul li {
+    margin-right: auto;
+    margin-left: 1.5rem;
+}
+
+.rounded-legend.legend-top-right ul {
+    float: right;
+}
+
+.rtl .rounded-legend.legend-top-right ul {
+    float: left;
+}
+
+.rounded-legend.legend-vertical ul li {
+    margin-top: 1rem;
+}
+
+.accordion-button:focus, .accordion-collapse:focus, .text-black{
+    color: #2f323e!important;
+}
+
+.accordion-button:focus{
+    border: 1px solid #ddd;
+}
+
+.h-400{
+    height: 400px!important;
+}

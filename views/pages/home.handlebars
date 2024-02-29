@@ -1,53 +1,189 @@
 {{#if user.role}}
-    <div class="row justify-content-center">
-        <div class="col-lg-4 col-md-12">
-            <div class="white-box analytics-info">
-                <h3 class="box-title">Total Visit</h3>
+<div class="row">
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-cyan px-3">
+                <h1 class="font-light text-white"><i class="fas fa-user-plus"></i></h1>
+                <h6 class="text-white">Nombre du client</h6>
                 <ul class="list-inline two-part d-flex align-items-center mb-0">
-                    <li>
-                        <div id="sparklinedash"><canvas width="67" height="30"
-                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                        </div>
-                    </li>
-                    <li class="ms-auto"><span class="counter text-success">659</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="white-box analytics-info">
-                <h3 class="box-title">Total Page Views</h3>
-                <ul class="list-inline two-part d-flex align-items-center mb-0">
-                    <li>
-                        <div id="sparklinedash2"><canvas width="67" height="30"
-                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                        </div>
-                    </li>
-                    <li class="ms-auto"><span class="counter text-purple">869</span></li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-12">
-            <div class="white-box analytics-info">
-                <h3 class="box-title">Unique Visitor</h3>
-                <ul class="list-inline two-part d-flex align-items-center mb-0">
-                    <li>
-                        <div id="sparklinedash3"><canvas width="67" height="30"
-                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                        </div>
-                    </li>
-                    <li class="ms-auto"><span class="counter text-info">911</span>
-                    </li>
+                    <li class="ms-auto"><span class="counter text-white">{{nombreTotalClient}}</span>
                 </ul>
             </div>
         </div>
     </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-success px-3">
+                <h1 class="font-light text-white"><i class="fas fa-users"></i></h1>
+                <h6 class="text-white">Nombre d'employé</h6>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li class="ms-auto"><span class="counter text-white">{{nombreTotalUser}}</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-warning px-3">
+                <h1 class="font-light text-white"><i class="fas fa-tags"></i></h1>
+                <h6 class="text-white">Nombre du service</h6>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li class="ms-auto"><span class="counter text-white">{{nombreTotalService}}</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+        <div class="card card-hover">
+            <div class="box bg-danger px-3">
+                <h1 class="font-light text-white"><i class="fas fa-money-bill-alt"></i></h1>
+                <h6 class="text-white">Portefeuille en attente</h6>
+                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                    <li class="ms-auto"><span class="counter text-white">{{nombreTotalWallet}}</span>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="accordion" id="accordionExample1">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed bg-white shadow-none text-black fw-bolder" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Statistique nombre de réservation par jour du mois de {{moisEncours}}
+                    </button>
+                </h2>
+                <div id="collapseOne1" class="accordion-collapse collapse bg-white" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample1">
+                    <div class="grid-margin stretch-card">
+                        <div class="card h-400 m-0 mb-4">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <div id="visit-sale-chart-legend-one"
+                                        class="rounded-legend legend-horizontal legend-top-right float-right ms-0"></div>
+                                </div>
+                                <canvas id="visit-sale-chart-one" class="mt-4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="accordion" id="accordionExample2">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed bg-white shadow-none text-black fw-bolder" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Statistique nombre de réservation par mois
+                    </button>
+                </h2>
+                <div id="collapseOne2" class="accordion-collapse collapse bg-white" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample2">
+                    <div class="grid-margin stretch-card">
+                        <div class="card h-400 m-0 mb-4">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <div id="visit-sale-chart-legend-two"
+                                        class="rounded-legend legend-horizontal legend-top-right float-right ms-0"></div>
+                                </div>
+                                <canvas id="visit-sale-chart-two" class="mt-4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {{ else }}
 
 <div class="row">
-    <div class="col-md-12">
-        <div class="white-box">
-            
+    <div class="col-sm-12 mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold">Total rendez-vous <span class="ms-2 py-2 px-3 bg-primary rounded-circle text-white shadow">{{appointmentsList.length}}</span></h5>
+            <div class="col-md-4">
+                <form action="/auth/home" method="get">
+                    <div class="input-group mb-3">
+                        <input type="date" class="form-control" name="date_filtre">
+                        <button type="submit" class="input-group-text btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
+    <div class="col-sm-12">
+        {{#isEqual appointmentsList.length 0}}
+            <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Vous n'avez pas encore des rendez-vous</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{else}}
+            {{#each  appointmentsList}}
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex flex-row comment-row mt-0">
+                            <div class="p-2"><img src="http://localhost:3000/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text w-100">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-medium fw-bold">{{this.client}}</h6>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                                <div class="accordion" id="accordionExample{{@key}}">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseThree{{@key}}" aria-expanded="false" aria-controls="collapseThree">
+                                                Bonjour, vous avez un rendez-vous de la part de <span class="fw-bold ps-1">James Anderson </span>. Pour voir
+                                                les détails du rendez-vous, veuillez cliquer sur l'icône située à droite
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree{{@key}}" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                            data-bs-parent="#accordionExample{{@key}}">
+                                            <div class="accordion-body">
+                                                <div class="row">
+                                                    {{#each  this.services}}
+                                                        <div class="col-sm-12 col-md-3">
+                                                            <div class="card card-hover shadow h-100">
+                                                                <img class="card-img-top h-180" src="{{this.images}}" alt="Card image">
+                                                                <div class="card-body">
+                                                                    <div class="h-85">
+                                                                        <h4 class="card-title fw-bold">{{this.name}}</h4>
+                                                                        <p class="card-text">Duré du service : {{formatTimeWithoutSecond this.duration}}</p>
+                                                                        <p class="card-text">En attente</p>
+                                                                    </div>
+                                                                    <div class="d-grid">
+                                                                        <button type="button" class="btn btn-outline-primary fs-2"><i class="fas fa-plus"></i>
+                                                                            Ajouter au
+                                                                            liste des tâches</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {{/each}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 comment-footer">
+                                    <span class="text-muted float-end">{{formatDate this.createdAt}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        {{/isEqual}}
     </div>
 </div>
 

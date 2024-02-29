@@ -1,14 +1,113 @@
+// data user admin - password=123456
 {
     "firstName": "RAKOTO",
     "lastName": "Jean",
     "email": "administrateur@gmail.com",
     "password": "$2b$10$zsGXj.WVyrxcAzgCFQ6U1.1MhdyCt0gh.arsEwk084iDel71lloIy",
-    "contact": ["32000000"],
+    "contact": ["320000000"],
     "role": 1,
     "statut": 1,
     "photo": "http://localhost:3000/images/users/1.jpg",
     "speciality": [],
     "appointments": [],
-    "createdAt": "2024-02-19T08:02:06.995+00:00",
-    "updatedAt": "2024-02-19T08:02:06.995+00:00"
+    "createdAt": {
+        "$date": "2024-02-26T18:51:20.463Z"
+    },
+    "updatedAt": {
+        "$date": "2024-02-26T18:51:20.463Z"
+    }
 }
+
+
+// data appointment
+{
+    "datetimeStart": {
+      "$date": "2024-02-26T08:02:06.995Z"
+    },
+    "datetimeEnd": {
+      "$date": "2024-02-26T09:02:06.995Z"
+    },
+    "status": "pending",
+    "montant": 10000,
+    "services": [
+      {
+        "_id": {
+          "$oid": "65d202961c9bf35badb970d9"
+        },
+        "name": "Coloration cheveux",
+        "price": 560000,
+        "duration": "14:13",
+        "commission": 2,
+        "images": "http://localhost:3000/images/services/1708262037944-358816940.png",
+        "createdAt": {
+          "$date": "2024-02-18T13:13:23.590Z"
+        },
+        "updatedAt": {
+          "$date": "2024-02-18T13:13:23.590Z"
+        },
+        "__v": 0,
+        "type": "Normale"
+      },
+      {
+        "_id": {
+          "$oid": "65dcddd6f7ea9b3bcb6a256f"
+        },
+        "name": "Coloration",
+        "price": 240000,
+        "duration": "00:50",
+        "commission": 4,
+        "type": "Normale",
+        "images": "http://localhost:3000/images/services/1708973526028-758101181.png",
+        "createdAt": {
+          "$date": "2024-02-26T18:51:20.463Z"
+        },
+        "updatedAt": {
+          "$date": "2024-02-26T18:51:20.463Z"
+        },
+        "__v": 0
+      }
+    ],
+    "employee": [
+      "65d15891993d6afd7a1d38df",
+      "65d30bfa03e6c41a1099aa0a"
+    ],
+    "client": "",
+    "createdAt": {
+      "$date": "2024-02-26T08:02:06.995Z"
+    },
+    "updatedAt": {
+      "$date": "2024-02-26T08:02:06.995Z"
+    }
+  }
+
+  // data client password=aaaaaa
+  {
+    "name": "RAKOTO Jean",
+    "email": "jean@gmail.com",
+    "contact": "",
+    "adress": "Andoharanofotsy",
+    "password": "$2b$10$A5RDQCNKSMtGskF4i4NXGeku0KLniTITAthk8vONcTV2p/QCuu3qi",
+    "appointments": [],
+    "employee_prefer": [],
+    "service_prefer": [],
+    "createdAt": {
+      "$date": "2024-02-28T08:02:06.995Z"
+    },
+    "updatedAt": {
+      "$date": "2024-02-28T08:02:06.995Z"
+    }
+  }
+
+  // data wallet
+  {
+    "clientsId": "65deb3ed1ece8e839eec623b",
+    "validation": 0,
+    "credit": 100000,
+    "debit": 0,
+    "createdAt": {
+      "$date": "2024-02-28T08:02:06.995Z"
+    },
+    "updatedAt": {
+      "$date": "2024-02-28T08:02:06.995Z"
+    }
+  }

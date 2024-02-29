@@ -1,3 +1,29 @@
+<div class="modal fade" id="modalStatusUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="StatusUserLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/auth/update-status-user" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="StatusUserLabel">Modification status du compte d'utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <i class="mdi mdi-alert fs-1 text-danger"></i>
+                    </div>
+                    <p class="text-center">Vous voulez vraiment <span class="fw-bold" id="label_status_user"></span> le compte qui porte le nom <span class="fw-bold" id="label_name_user"></span> ?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <input type="hidden" name="statusUser" id="statusUser">
+                    <input type="hidden" name="usersId" id="usersId">
+                    <button type="button" class="btn btn-secondary text-white w-45" data-bs-dismiss="modal">Non</button>
+                    <button type="submit" class="btn btn-danger text-white w-45">Oui</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -10,7 +36,7 @@
                                 <th class="border-top-0">Nom et Prénom</th>
                                 <th class="border-top-0">Actif</th>
                                 <th class="border-top-0">Spécialité</th>
-                                <th class="border-top-0">Options</th>
+                                <th class="border-top-0">Contact</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,14 +49,12 @@
                                 </td>
                                 <td>{{this.firstName}} {{this.lastName}}</td>
                                 {{#if this.statut}}
-                                <td align="center"><i class="fs-6 fas fa-toggle-on cursor-pointer"></i></td>
+                                <td align="center"><i class="fs-6 fas fa-toggle-on cursor-pointer" data-bs-toggle="modal" value="{{ this._id }}" id="statusUsers" data-bs-target="#modalStatusUser"></i></td>
                                 {{else }}
-                                <td align="center"><i class="fs-6 fas fa-toggle-on"></i></td>
+                                <td align="center"><i class="fs-6 fas fa-toggle-off cursor-pointer" data-bs-toggle="modal" value="{{ this._id }}" id="statusUsers" data-bs-target="#modalStatusUser"></i></td>
                                 {{/if}}
                                 <td>{{this.speciality}}</td>
-                                <td align="center">
-                                    <a href="#" class="btn btn-outline-secondary"><i class="fas fa-eye"></i> Voir plus infos</a>
-                                </td>
+                                <td align="center">{{getContact this.contact 0 }}</td>
                             </tr>
                             {{/each}}
                         </tbody>

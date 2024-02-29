@@ -95,7 +95,7 @@ async function updateProfileUser(req, res, next){
   const dataUser = {
     firstName: req.body.firstName.trim().toUpperCase(),
     lastName: fonction.ucwords(req.body.lastName.trim()),
-    contact: fonction.deleteDouble(req.session.user.contact, contactList),
+    contact: fonction.deleteElement(req.session.user.contact, contactList),
     speciality: fonction.deleteElement(req.session.user.speciality, speciality),
     updatetAt: new Date()
   };
@@ -108,4 +108,20 @@ async function updateProfileUser(req, res, next){
   }
 }
 
-module.exports = {register, listEmployes, profile, updatePhoto, getSimpleUser, updateProfileUser};
+async function ajaxSimpleuser(req, res, next){
+  const id = req.params.id;
+  const user = await User.findOne({_id: id});
+  res.json(user);
+}
+
+async function updatedStatus(req, res, next){
+  let status = req.body.statusUser==1 ? 0 : 1;
+  const dataUser = {
+    statut: status,
+    updatedAt: new Date()
+  };
+  await User.findByIdAndUpdate(req.body.usersId, dataUser, {new: true});
+  res.redirect('/auth/employes');
+}
+
+module.exports = {register, listEmployes, profile, updatePhoto, getSimpleUser, updateProfileUser, ajaxSimpleuser, updatedStatus};

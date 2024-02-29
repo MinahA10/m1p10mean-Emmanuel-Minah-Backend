@@ -3,6 +3,10 @@ $(function(){
     let splitUrl = fullUrl.split("/");
     let urlApp = splitUrl[0]+"//"+splitUrl[2]+"/";
 
+    function formatMillier(nombre) {
+        return nombre.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
     $(document).on("change", "#fileInput", function(e){
         const file = this.files[0];
         if (file) {
@@ -94,7 +98,21 @@ $(function(){
                 $('#price').val(response.price);
                 $('#duration').val(response.duration);
                 $('#commission').val(response.commission);
+                const select = document.querySelectorAll('#type option');
+                select.forEach(element => {
+                    if(element.textContent === response.type){
+                        element.setAttribute('selected', '');
+                    }
+                });
             }
+        });
+    });
+
+    $(document).on("click", "#close_modif_service", function(e){
+        e.preventDefault();
+        const select = document.querySelectorAll('#type option');
+            select.forEach(element => {
+               element.removeAttribute('selected');
         });
     });
 
@@ -108,6 +126,38 @@ $(function(){
             success: function(response){
                 $("#label_suppression_service").text(response.name);
                 $("#servicesSuppId").val(response._id);
+            }
+        });
+    });
+
+    $(document).on("click", "#confirmationPortefeuille", function(e){
+        e.preventDefault();
+        let id = $(this).attr("value");
+        $.ajax({
+            url: urlApp+"auth/ajax-wallet/"+id,
+            type: "get",
+            dataType: "json",
+            success: function(response){
+                $('#label_confirmation_portefeuille_nom').text(response.clients.name);
+                $('#label_confirmation_portefeuille_montant').text(formatMillier(response.credit).concat(' Ar'));
+                $('#walletsId').val(response._id);
+            }
+        });
+    });
+
+    $(document).on("click", "#statusUsers", function(e){
+        e.preventDefault();
+        let id = $(this).attr("value");
+        $.ajax({
+            url: urlApp+"auth/ajax-user/"+id,
+            type: "get",
+            dataType: "json",
+            success: function(response){
+                let status = response.statut ? 'désactivé' : 'activé';
+                $('#label_status_user').text(status);
+                $('#label_name_user').text(response.firstName+' '+response.lastName);
+                $('#statusUser').val(response.statut);
+                $('#usersId').val(response._id);
             }
         });
     });

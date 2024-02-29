@@ -23,7 +23,9 @@ const clientSchema = new mongoose.Schema({
   service_prefer: {
     type: Array,
     default: []
-  }
+  },
+  createdAt: {type: Date, default: new Date()},
+  updatedAt: {type: Date, default: new Date()}
 });
 
 clientSchema.pre('save', async function (next) {
