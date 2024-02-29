@@ -56,6 +56,14 @@ app.engine('handlebars', exphbs.engine({
     }
   }
 }));
+
+const corsOptions = {
+    origin: '*', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+};
+
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
 
@@ -71,7 +79,7 @@ app.use('/auth/images', express.static(__dirname + '/public/images'));
 app.use('/auth/parametre/css', express.static(__dirname + '/public/css'));
 app.use('/auth/parametre/js', express.static(__dirname + '/public/js'));
 app.use('/auth/parametre/images', express.static(__dirname + '/public/images'));
-app.use(cors());
+app.use(cors(corsOptions));
 
 
 app.use(session({
