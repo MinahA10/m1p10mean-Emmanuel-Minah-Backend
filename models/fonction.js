@@ -23,6 +23,7 @@ function listContact(contact1, contact2) {
   return contactList;
 }
 
+
 function fileName(req, file, cb) {
   const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
   const extension = getFileExtension(file.originalname);
@@ -140,4 +141,114 @@ function addMinutesToDate(dateString, minutesToAdd) {
   return formattedDate;
 }
 
-module.exports = {getFileExtension, formatMillier, ucwords, listContact, fileName, uploadImage, formaterNumeroTelephone, getContact, deleteDouble, isArray, deleteElement,timeToMinute,addMinutesToDate};
+function formatDate(dateString) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('fr-FR', options);
+}
+
+function formatTime(dateString) {
+  const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+  const date = new Date(dateString);
+  return date.toLocaleTimeString('fr-FR', options);
+}
+
+function formatTimeWithoutSecond(inputTime) {
+  const [hour, minute] = inputTime.split(':');
+  if (hour === "00") {
+      return `${minute} min`;
+  } else {
+      return `${hour}h ${minute}min`;
+  }
+}
+
+function getDateFromDateTime(args){
+  const date = args.length == 0 ? new Date() : new Date(args);
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function somme(array){
+  return array.reduce((element, acc) => acc += element, 0);
+}
+
+function getListDayInMonth(mois, annee) {
+  let estBissextile = (annee % 4 === 0 && annee % 100 !== 0) || annee % 400 === 0;
+  let joursDansChaqueMois = [31, (estBissextile ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let dernierJour = joursDansChaqueMois[mois - 1];
+  let joursMois = [];
+  for (let jour = 1; jour <= dernierJour; jour++) {
+      joursMois.push(jour);
+  }
+  return joursMois;
+}
+
+function getListDateInMonth(mois, annee){
+  let listDate = [];
+  let listDayInMonth = getListDayInMonth(mois, annee);
+  let month = mois >= 1 && mois <= 9 ? '0'+mois : mois;
+  for(let i = 0; i < listDayInMonth.length; i++){
+    if(listDayInMonth[i] >= 1 && listDayInMonth[i] <= 9){
+        listDate.push(annee+'-'+month+'-0'+listDayInMonth[i]);
+    }else{
+      listDate.push(annee+'-'+month+'-'+listDayInMonth[i]);
+    }
+  }
+  return listDate;
+}
+
+function getListMonth(){
+  const listMonth = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+  return listMonth;
+}
+
+function getMoisEncours(mois){
+  const listMonth = getListMonth();
+  return listMonth[mois];
+}
+
+function getDateDebutMonth(month, year){
+    let monthStr = month >= 1 && month <= 9 ? '0'+month : month.toString();
+    return year+'-'+monthStr+'-'+'01';
+}
+
+function getDateFinMonth(month, year){
+  let estBissextile = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  let joursDansChaqueMois = [31, (estBissextile ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  let monthStr = month >= 1 && month <= 9 ? '0'+month : month.toString();
+  let jourStr = joursDansChaqueMois[month-1];
+  return year+'-'+monthStr+'-'+jourStr;
+}
+
+function getListDateDebutEtFinDuMois(year, myCallback){
+  let listMonth = [];
+  for(let i = 1; i <= 12; i++){
+    listMonth.push(myCallback(i, year));
+  }
+  return listMonth;
+}
+
+module.exports = {
+  getFileExtension, 
+  formatMillier, 
+  ucwords, 
+  listContact, 
+  fileName, 
+  uploadImage, 
+  formaterNumeroTelephone, 
+  getContact, 
+  deleteDouble, 
+  isArray, 
+  deleteElement, 
+  formatDate, 
+  formatTime, 
+  formatTimeWithoutSecond, 
+  getDateFromDateTime, 
+  somme,
+  getListDayInMonth,
+  getListDateInMonth,
+  getMoisEncours,
+  getDateDebutMonth,
+  getDateFinMonth,
+  getListDateDebutEtFinDuMois,
+  getListMonth
+};

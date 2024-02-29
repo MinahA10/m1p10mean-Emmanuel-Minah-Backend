@@ -34,7 +34,6 @@ var indexRouterAuth = require('./routes/auth/index');
 
 var app = express();
 
-
 // view engine setup
 app.engine('handlebars', exphbs.engine({
   defaultLayout: "guest", 
@@ -53,9 +52,28 @@ app.engine('handlebars', exphbs.engine({
     },
     getSimpleContact: function(args, index){
       return fonction.getContact(args, index);
+    },
+    formatDate: function(args){
+      return fonction.formatDate(args.toISOString());
+    },
+    formatHeure: function(args){
+      return fonction.formatHeure(args.toISOString());
+    },
+    isEqual: function(value1, value2, options) {
+        return value1 === value2 ? options.fn(this) : options.inverse(this);
+    },
+    isNotEqual: function(value1, value2, options) {
+        return value1 === value2 ? options.inverse(this) : options.fn(this);
+    },
+    formatTimeWithoutSecond: function(args){
+      return fonction.formatTimeWithoutSecond(args);
+    },
+    convertArray: function(args){
+      return JSON.stringify(args);
     }
   }
 }));
+
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
 
