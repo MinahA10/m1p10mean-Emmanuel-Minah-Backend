@@ -18,6 +18,7 @@ async function created(req, res, next) {
             price: req.body.price,
             duration: req.body.duration,
             commission: req.body.commission,
+            type: req.body.type,
             images: urlApp+'/images/services/'+ fileName,
         }
         try{
@@ -64,6 +65,7 @@ async function modificationServices(req, res, next){
             price: req.body.price,
             duration: req.body.duration,
             commission: req.body.commission,
+            type: req.body.type,
             images: urlApp+'/images/services/'+ fileName,
             createdAt: simpleService.createdAt,
             updatedAt: new Date()
@@ -74,6 +76,7 @@ async function modificationServices(req, res, next){
             price: req.body.price,
             duration: req.body.duration,
             commission: req.body.commission,
+            type: req.body.type,
             images: simpleService.images,
             createdAt: simpleService.createdAt,
             updatedAt: new Date()

@@ -68,6 +68,8 @@
     <!-- Bootstrap tether Core JavaScript -->
     <script src="js/bootstrap.bundle.min.js"></script>
 
+    <script src="js/dragDrop.js"></script>
+
     <script src="js/script-ajax.js"></script>
 
     <script src="js/app-style-switcher.js"></script>
@@ -77,6 +79,191 @@
     <script src="js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="js/custom.js"></script>
+
+    <script src="js/chart.min.js"></script>
+{{#if dashboard}}
+    <script>
+        (function($) {
+            'use strict';
+            $(function() {
+
+                Chart.defaults.global.legend.labels.usePointStyle = true;
+
+                if ($("#visit-sale-chart-one").length) {
+                    Chart.defaults.global.legend.labels.usePointStyle = true;
+                    var ctx = document.getElementById('visit-sale-chart-one').getContext("2d");
+
+                    var gradientStrokeViolet = ctx.createLinearGradient(0, 0, 0, 181);
+                    gradientStrokeViolet.addColorStop(0, 'rgba(218, 140, 255, 1)');
+                    gradientStrokeViolet.addColorStop(1, 'rgba(154, 85, 255, 1)');
+                    var gradientLegendViolet = 'linear-gradient(to right, rgba(218, 140, 255, 1), rgba(154, 85, 255, 1))';
+
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: {{convertArray listDayInMonth}},
+                            datasets: [
+                            {
+                                label: "Nombre de réservation",
+                                borderColor: gradientStrokeViolet,
+                                backgroundColor: gradientStrokeViolet,
+                                hoverBackgroundColor: gradientStrokeViolet,
+                                legendColor: gradientLegendViolet,
+                                pointRadius: 0,
+                                fill: false,
+                                borderWidth: 1,
+                                fill: 'origin',
+                                data: {{convertArray listTotalAppointmentParJour}}
+                            }
+                        ]
+                        },
+                        options: {
+                        responsive: true,
+                        legend: false,
+                        legendCallback: function(chart) {
+                            var text = []; 
+                            text.push('<ul class="ps-0">'); 
+                            for (var i = 0; i < chart.data.datasets.length; i++) { 
+                                text.push('<li><span class="legend-dots" style="background:' + 
+                                        chart.data.datasets[i].legendColor + 
+                                        '"></span>'); 
+                                if (chart.data.datasets[i].label) { 
+                                    text.push(chart.data.datasets[i].label); 
+                                } 
+                                text.push('</li>'); 
+                            } 
+                            text.push('</ul>'); 
+                            return text.join('');
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    display: false,
+                                    min: 0,
+                                    stepSize: 20,
+                                    max: 80
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    color: 'rgba(235,237,242,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    display:false,
+                                    drawBorder: false,
+                                    color: 'rgba(0,0,0,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                },
+                                ticks: {
+                                    padding: 20,
+                                    fontColor: "#9c9fa6",
+                                    autoSkip: true,
+                                },
+                                categoryPercentage: 0.5,
+                                barPercentage: 0.5
+                            }]
+                            }
+                        },
+                        elements: {
+                            point: {
+                            radius: 0
+                            }
+                        }
+                    })
+                    $("#visit-sale-chart-legend-one").html(myChart.generateLegend());
+                }
+
+                if ($("#visit-sale-chart-two").length) {
+                    Chart.defaults.global.legend.labels.usePointStyle = true;
+                    var ctx = document.getElementById('visit-sale-chart-two').getContext("2d");
+
+                    var gradientStrokeBlue = ctx.createLinearGradient(0, 0, 0, 181);
+                    gradientStrokeBlue.addColorStop(0, 'rgba(54, 215, 232, 1)');
+                    gradientStrokeBlue.addColorStop(1, 'rgba(177, 148, 250, 1)');
+                    var gradientLegendBlue = 'linear-gradient(to right, rgba(54, 215, 232, 1), rgba(177, 148, 250, 1))';
+
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                            datasets: [
+                            {
+                                label: "Nombre de réservation",
+                                borderColor: gradientStrokeBlue,
+                                backgroundColor: gradientStrokeBlue,
+                                hoverBackgroundColor: gradientStrokeBlue,
+                                legendColor: gradientLegendBlue,
+                                pointRadius: 0,
+                                fill: false,
+                                borderWidth: 1,
+                                fill: 'origin',
+                                data: {{convertArray listTotalAppointmentParMois}}
+                            }
+                        ]
+                        },
+                        options: {
+                        responsive: true,
+                        legend: false,
+                        legendCallback: function(chart) {
+                            var text = []; 
+                            text.push('<ul class="ps-0">'); 
+                            for (var i = 0; i < chart.data.datasets.length; i++) { 
+                                text.push('<li><span class="legend-dots" style="background:' + 
+                                        chart.data.datasets[i].legendColor + 
+                                        '"></span>'); 
+                                if (chart.data.datasets[i].label) { 
+                                    text.push(chart.data.datasets[i].label); 
+                                } 
+                                text.push('</li>'); 
+                            } 
+                            text.push('</ul>'); 
+                            return text.join('');
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    display: false,
+                                    min: 0,
+                                    stepSize: 20,
+                                    max: 80
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    color: 'rgba(235,237,242,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    display:false,
+                                    drawBorder: false,
+                                    color: 'rgba(0,0,0,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                },
+                                ticks: {
+                                    padding: 20,
+                                    fontColor: "#9c9fa6",
+                                    autoSkip: true,
+                                },
+                                categoryPercentage: 0.5,
+                                barPercentage: 0.5
+                            }]
+                            }
+                        },
+                        elements: {
+                            point: {
+                            radius: 0
+                            }
+                        }
+                    })
+                    $("#visit-sale-chart-legend-two").html(myChart.generateLegend());
+                }
+            });
+        })(jQuery);
+    </script>
+{{/if}}
 </body>
 
 </html>

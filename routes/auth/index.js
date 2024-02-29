@@ -6,6 +6,7 @@ const userController = require('../../controllers/Admin/userController');
 const parametreController = require('../../controllers/Admin/parametreController');
 const horaireController = require('../../controllers/Admin/horaireController');
 const tacheController = require('../../controllers/Admin/tacheController');
+const walletController = require('../../controllers/Client/walletController');
 const fonction = require('../../models/fonction');
 
 
@@ -51,7 +52,11 @@ router.post('/update-photo-user', authMiddleware, uploadImageUser.single('file')
 
 router.get('/ajax-simple-user', authMiddleware, userController.getSimpleUser);
 
+router.get('/ajax-user/:id', authMiddleware, userController.ajaxSimpleuser);
+
 router.post('/update-profile-user', authMiddleware, userController.updateProfileUser);
+
+router.post('/update-status-user', authMiddleware, userController.updatedStatus);
 
 
 
@@ -82,6 +87,17 @@ router.get('/horaire-de-travail', authMiddleware, horaireController.page);
 
 // route tâche
 router.get('/liste-des-taches', authMiddleware, tacheController.page);
+
+
+
+// route portefauille client
+router.get('/liste-portefeuille', authMiddleware, walletController.liste);
+
+router.get('/ajax-wallet/:id', authMiddleware, walletController.ajaxWallet);
+
+router.post('/confirm-wallet', authMiddleware, walletController.confirmWallet);
+
+router.post('/add-wallet-credit', authMiddleware, walletController.creditWallet);
 
 
 module.exports = router;

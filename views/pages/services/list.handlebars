@@ -26,14 +26,25 @@
                             <input type="number" class="form-control" name="commission" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="image_service" class="form-label">Image <span class="required">*</span></label>
-                            <input type="file" class="form-control" name="images_services" required>
+                            <label for="type" class="form-label">Type <span class="required">*</span></label>
+                            <select name="type" class="form-select">
+                                <option value="#" selected disabled>-- Séléctionner --</option>
+                                <option value="Normale">Normale</option>
+                                <option value="Spéciale">Spéciale</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3" id="dropZonePhoto">
+                            <label for="image" class="form-label drop-zone__prompt">Glisser et déposer une image ici ou cliquez pour choisir un fichier <span class="required">*</span></label>
+                            <input type="file" class="form-control" id="fileInput" name="images_services" accept="image/*" required>
+                            <div class="col-md-12 border-bottom p-0">
+                                <img src="" id="photoPreview" alt="Aperçu de la photo" style="max-width: 200px; display: none;">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"> Ajouter</button>
-                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"> Fermer</button>
+                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Enregistrer</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Fermer</button>
                 </div>
             </form>
         </div>
@@ -47,7 +58,7 @@
             <form action="/auth/modification-services" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title fw-bold" id="exampleModalLabel">Formulaire pour modifier un service</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" id="close_modif_service" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -68,15 +79,22 @@
                             <input type="number" class="form-control" id="commission" name="commission" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="images_services" name="images_services">
+                            <label for="type" class="form-label">Type <span class="required">*</span></label>
+                            <select name="type" id="type" class="form-select">
+                                <option value="Normale">Normale</option>
+                                <option value="Spéciale">Spéciale</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="image_service" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="images_services" name="images_services" required>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="servicesId" id="servicesModifId">
-                    <button type="submit" class="btn btn-primary"> Enregistrer</button>
-                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"> Fermer</button>
+                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Enregistrer</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" id="close_modif_service"><i class="fas fa-times"></i> Fermer</button>
                 </div>
             </form>
         </div>
@@ -110,7 +128,7 @@
 <div class="row">
     {{#each servicesList}}
         <div class="col-sm-12 col-md-3">
-            <div class="card shadow h-100">
+            <div class="card card-hover shadow h-100">
                 <img class="card-img-top h-180" src="{{this.images}}" alt="Card image">
                 <div class="card-body">
                     <div class="h-85">
@@ -118,7 +136,7 @@
                         <p class="card-text">{{formatMillier this.price}} Ar</p>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-outline-success fs-2" data-bs-toggle="modal" value="{{ this._id }}" id="modificationServices" data-bs-target="#modalModificationService"><i class="fas fa-pencil-alt"></i> Modifier</button>
+                        <button type="button" class="btn btn-outline-primary fs-2" data-bs-toggle="modal" value="{{ this._id }}" id="modificationServices" data-bs-target="#modalModificationService"><i class="fas fa-pencil-alt"></i> Modifier</button>
                         <button type="button" class="btn btn-outline-danger fs-2" data-bs-toggle="modal" value="{{ this._id }}" id="suppressionServices" data-bs-target="#modalSuppressionService"><i class="fas fa-trash-alt"></i> Supprimer</button>
                     </div>
                 </div>

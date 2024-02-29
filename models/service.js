@@ -17,6 +17,10 @@ const ServicesSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    type: {
+        type: String,
+        required: true
+    },
     images: {
         type: String,
         required: true
