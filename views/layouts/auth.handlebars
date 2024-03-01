@@ -260,6 +260,178 @@
                     })
                     $("#visit-sale-chart-legend-two").html(myChart.generateLegend());
                 }
+
+                if ($("#visit-sale-chart-three").length) {
+                    Chart.defaults.global.legend.labels.usePointStyle = true;
+                    var ctx = document.getElementById('visit-sale-chart-three').getContext("2d");
+
+                    var gradientStrokeRed = ctx.createLinearGradient(0, 0, 0, 300);
+                    gradientStrokeRed.addColorStop(0, 'rgba(255, 191, 150, 1)');
+                    gradientStrokeRed.addColorStop(1, 'rgba(254, 112, 150, 1)');
+                    var gradientLegendRed = 'linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))';
+
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: {{convertArray listDayInMonth}},
+                            datasets: [
+                            {
+                                label: "Chiffre d'affaire",
+                                borderColor: gradientStrokeRed,
+                                backgroundColor: gradientStrokeRed,
+                                hoverBackgroundColor: gradientStrokeRed,
+                                legendColor: gradientLegendRed,
+                                pointRadius: 0,
+                                fill: false,
+                                borderWidth: 1,
+                                fill: 'origin',
+                                data: {{convertArray listChiffreDaffaireParJour}}
+                            }
+                        ]
+                        },
+                        options: {
+                        responsive: true,
+                        legend: false,
+                        legendCallback: function(chart) {
+                            var text = []; 
+                            text.push('<ul class="ps-0">'); 
+                            for (var i = 0; i < chart.data.datasets.length; i++) { 
+                                text.push('<li><span class="legend-dots" style="background:' + 
+                                        chart.data.datasets[i].legendColor + 
+                                        '"></span>'); 
+                                if (chart.data.datasets[i].label) { 
+                                    text.push(chart.data.datasets[i].label); 
+                                } 
+                                text.push('</li>'); 
+                            } 
+                            text.push('</ul>'); 
+                            return text.join('');
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    display: false,
+                                    min: 0,
+                                    stepSize: 1000000,
+                                    max: 5000000
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    color: 'rgba(235,237,242,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    display:false,
+                                    drawBorder: false,
+                                    color: 'rgba(0,0,0,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                },
+                                ticks: {
+                                    padding: 20,
+                                    fontColor: "#9c9fa6",
+                                    autoSkip: true,
+                                },
+                                categoryPercentage: 0.5,
+                                barPercentage: 0.5
+                            }]
+                            }
+                        },
+                        elements: {
+                            point: {
+                            radius: 0
+                            }
+                        }
+                    })
+                    $("#visit-sale-chart-legend-three").html(myChart.generateLegend());
+                }
+
+                if ($("#visit-sale-chart-four").length) {
+                    Chart.defaults.global.legend.labels.usePointStyle = true;
+                    var ctx = document.getElementById('visit-sale-chart-four').getContext("2d");
+
+                    var gradientStrokeGreen = ctx.createLinearGradient(0, 0, 0, 300);
+                    gradientStrokeGreen.addColorStop(0, 'rgba(6, 185, 157, 1)');
+                    gradientStrokeGreen.addColorStop(1, 'rgba(132, 217, 210, 1)');
+                    var gradientLegendGreen = 'linear-gradient(to right, rgba(6, 185, 157, 1), rgba(132, 217, 210, 1))'; 
+
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                            datasets: [
+                            {
+                                label: "Chiffre d'affaire",
+                                borderColor: gradientStrokeGreen,
+                                backgroundColor: gradientStrokeGreen,
+                                hoverBackgroundColor: gradientStrokeGreen,
+                                legendColor: gradientLegendGreen,
+                                pointRadius: 0,
+                                fill: false,
+                                borderWidth: 1,
+                                fill: 'origin',
+                                data: {{convertArray listChiffreDaffaireParMois}}
+                            }
+                        ]
+                        },
+                        options: {
+                        responsive: true,
+                        legend: false,
+                        legendCallback: function(chart) {
+                            var text = []; 
+                            text.push('<ul class="ps-0">'); 
+                            for (var i = 0; i < chart.data.datasets.length; i++) { 
+                                text.push('<li><span class="legend-dots" style="background:' + 
+                                        chart.data.datasets[i].legendColor + 
+                                        '"></span>'); 
+                                if (chart.data.datasets[i].label) { 
+                                    text.push(chart.data.datasets[i].label); 
+                                } 
+                                text.push('</li>'); 
+                            } 
+                            text.push('</ul>'); 
+                            return text.join('');
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    display: false,
+                                    min: 0,
+                                    stepSize: 10000000,
+                                    max: 50000000
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    color: 'rgba(235,237,242,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                }
+                            }],
+                            xAxes: [{
+                                gridLines: {
+                                    display:false,
+                                    drawBorder: false,
+                                    color: 'rgba(0,0,0,1)',
+                                    zeroLineColor: 'rgba(235,237,242,1)'
+                                },
+                                ticks: {
+                                    padding: 20,
+                                    fontColor: "#9c9fa6",
+                                    autoSkip: true,
+                                },
+                                categoryPercentage: 0.5,
+                                barPercentage: 0.5
+                            }]
+                            }
+                        },
+                        elements: {
+                            point: {
+                            radius: 0
+                            }
+                        }
+                    })
+                    $("#visit-sale-chart-legend-four").html(myChart.generateLegend());
+                }
             });
         })(jQuery);
     </script>

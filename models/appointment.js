@@ -113,5 +113,31 @@ module.exports.getListTotalAppointmentParMois = async (annee) => {
   return listTotalAppointmentParMois;
 }
 
+function sommeChiffreDaffaireParJour(listAppoitement){
+  let listMontant = [];
+  listAppoitement.forEach(element => listMontant.push(element.montant));
+  return listMontant.reduce((montant, acc) => acc+= montant, 0);
+}
+
+module.exports.getListChiffreDaffaireParJour = async (mois, annee) => {
+  const listChiffreDaffaireParJour = [];
+  const listDate = fonction.getListDateInMonth(mois, annee);
+  for(let date of listDate){
+    let listAppoitement = await getTotalAppointmentsByDate(date, "");
+    listChiffreDaffaireParJour.push(sommeChiffreDaffaireParJour(listAppoitement));
+  }
+  return listChiffreDaffaireParJour;
+}
+
+module.exports.getListChiffreDaffaireParMois = async (annee) => {
+  const listChiffreDaffaireParMois = [];
+  const listDateDebutDuMois = fonction.getListDateDebutEtFinDuMois(annee, fonction.getDateDebutMonth);
+  const listDateFinDuMois = fonction.getListDateDebutEtFinDuMois(annee, fonction.getDateFinMonth);
+  for(let i = 0; i < listDateDebutDuMois.length; i++){
+    let listAppoitement = await getTotalAppointmentsByDate(listDateDebutDuMois[i], listDateFinDuMois[i]);
+    listChiffreDaffaireParMois.push(sommeChiffreDaffaireParJour(listAppoitement));
+  }
+  return listChiffreDaffaireParMois;
+}
 
   
