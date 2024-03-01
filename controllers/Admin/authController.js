@@ -30,7 +30,9 @@ async function home(req, res, next) {
       const nombreTotalWallet = (await Wallet.find({validation: 0})).length;
       const listMonthStr = fonction.getListMonth();
       const listTotalAppointmentParMois = await Appointment.getListTotalAppointmentParMois(year);
-      res.render('pages/home', {layout: 'auth', title: 'Page d\'accueil', page, dashboard, listTotalAppointmentParJour, listDayInMonth, moisEncours, nombreTotalClient, nombreTotalUser, nombreTotalService, nombreTotalWallet, listMonthStr, listTotalAppointmentParMois});
+      const listChiffreDaffaireParJour = await Appointment.getListChiffreDaffaireParJour(month, year);
+      const listChiffreDaffaireParMois = await Appointment.getListChiffreDaffaireParMois(year);
+      res.render('pages/home', {layout: 'auth', title: 'Page d\'accueil', page, dashboard, listTotalAppointmentParJour, listDayInMonth, moisEncours, nombreTotalClient, nombreTotalUser, nombreTotalService, nombreTotalWallet, listMonthStr, listTotalAppointmentParMois, listChiffreDaffaireParJour, listChiffreDaffaireParMois, year});
     }
 }
 

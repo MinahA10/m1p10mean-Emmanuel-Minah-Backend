@@ -57,7 +57,7 @@
                     <button class="accordion-button collapsed bg-white shadow-none text-black fw-bolder" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseOne1" aria-expanded="false"
                         aria-controls="collapseOne">
-                        Statistique nombre de réservation par jour du mois de {{moisEncours}}
+                        Statistique nombre de réservation par jour du mois de {{moisEncours}} en {{year}}
                     </button>
                 </h2>
                 <div id="collapseOne1" class="accordion-collapse collapse bg-white" aria-labelledby="headingOne"
@@ -84,7 +84,7 @@
                     <button class="accordion-button collapsed bg-white shadow-none text-black fw-bolder" type="button"
                         data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="false"
                         aria-controls="collapseOne">
-                        Statistique nombre de réservation par mois
+                        Statistique nombre de réservation par mois en {{year}}
                     </button>
                 </h2>
                 <div id="collapseOne2" class="accordion-collapse collapse bg-white" aria-labelledby="headingOne"
@@ -97,6 +97,60 @@
                                         class="rounded-legend legend-horizontal legend-top-right float-right ms-0"></div>
                                 </div>
                                 <canvas id="visit-sale-chart-two" class="mt-4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mt-5">
+        <div class="accordion" id="accordionExample3">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed bg-white shadow-none text-black fw-bolder" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne3" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Statistique chiffre d’affaires par jour du mois de {{moisEncours}} en {{year}}
+                    </button>
+                </h2>
+                <div id="collapseOne3" class="accordion-collapse collapse bg-white" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample3">
+                    <div class="grid-margin stretch-card">
+                        <div class="card h-400 m-0 mb-4">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <div id="visit-sale-chart-legend-three"
+                                        class="rounded-legend legend-horizontal legend-top-right float-right ms-0"></div>
+                                </div>
+                                <canvas id="visit-sale-chart-three" class="mt-4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mt-5">
+        <div class="accordion" id="accordionExample4">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed bg-white shadow-none text-black fw-bolder" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#collapseOne4" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Statistique chiffre d’affaires par mois en {{year}}
+                    </button>
+                </h2>
+                <div id="collapseOne4" class="accordion-collapse collapse bg-white" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample4">
+                    <div class="grid-margin stretch-card">
+                        <div class="card h-400 m-0 mb-4">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <div id="visit-sale-chart-legend-four"
+                                        class="rounded-legend legend-horizontal legend-top-right float-right ms-0"></div>
+                                </div>
+                                <canvas id="visit-sale-chart-four" class="mt-4"></canvas>
                             </div>
                         </div>
                     </div>
