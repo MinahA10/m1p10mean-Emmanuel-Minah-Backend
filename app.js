@@ -120,6 +120,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.options('/api/appointment/create', cors());
 app.options('api/auth/login', cors());
 app.use('/', indexRouterGuest);
 app.use('/auth', indexRouterAuth);
