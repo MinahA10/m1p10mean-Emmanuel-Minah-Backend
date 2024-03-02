@@ -97,6 +97,7 @@ app.use('/auth/parametre/css', express.static(__dirname + '/public/css'));
 app.use('/auth/parametre/js', express.static(__dirname + '/public/js'));
 app.use('/auth/parametre/images', express.static(__dirname + '/public/images'));
 app.use(cors(corsOptions));
+app.use(cors());
 
 
 app.use(session({
@@ -120,7 +121,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.options('/api/appointment/create', cors());
+app.options('/api/appointment', cors());
 app.options('api/auth/login', cors());
 app.use('/', indexRouterGuest);
 app.use('/auth', indexRouterAuth);
